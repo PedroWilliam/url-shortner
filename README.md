@@ -15,7 +15,7 @@ az login
 ### Create Resource Group
 
 ```bash
-az group create --name urlshortner-[dev | stg | prod] --location eastus2
+az group create --name urlshortner-[dev | stg | prd] --location eastus2
 ```
 
 Listing locations
