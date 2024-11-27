@@ -5,6 +5,12 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.Api", "Api\src\UrlShortener.Api\UrlShortener.Api.csproj", "{08EE3871-5379-421E-91A6-B0DBD453D209}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{041FBBFA-390B-4282-A647-8880822B10D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E52561D6-4BA7-45E9-851F-E7AD8AB29DE5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B3A6A0BC-B750-492E-8F4C-73CC78203082}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +24,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{08EE3871-5379-421E-91A6-B0DBD453D209} = {E52561D6-4BA7-45E9-851F-E7AD8AB29DE5}
+		{E52561D6-4BA7-45E9-851F-E7AD8AB29DE5} = {041FBBFA-390B-4282-A647-8880822B10D7}
+		{B3A6A0BC-B750-492E-8F4C-73CC78203082} = {041FBBFA-390B-4282-A647-8880822B10D7}
 	EndGlobalSection
 EndGlobal
