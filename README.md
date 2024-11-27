@@ -42,6 +42,12 @@ az ad sp create-for-rbac --name "GitHub-Actions-SP" \
 
 We'll use the `clientId` and `tenantId`
 
+### Apply to Custom Contributor Role
+
+```bash
+az ad sp create-for-rbac --name "GitHub-Actions-SP" --role 'infra_deploy' --scopes /subscriptions/28c48ddb-bfa0-43e4-b7b4-ed7de0f35be3 --sdk-auth
+```
+
 #### Configure a federated identity credential on an app
 
 https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-create-trust?pivots=identity-wif-apps-methods-azp#configure-a-federated-identity-credential-on-an-app
