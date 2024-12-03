@@ -1,0 +1,7 @@
+﻿TESTE LIST
+✔️ Check if the end of range is gt start
+   Unique tokens
+   Accept multiple ranges
+   Range as a type
+   _tokenRange on TokenProvider can be null when getting the token
+✔️ Should the token range use longs instead of ints?
