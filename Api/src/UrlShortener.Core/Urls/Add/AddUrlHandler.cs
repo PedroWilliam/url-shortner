@@ -14,7 +14,8 @@ public class AddUrlHandler
     public async Task<AddUrlResponse> HandleAsync(AddUrlRequest request, CancellationToken cancellationToken)
     {
         var shortned = new ShortnedUrl(request.LongUrl,
-            _shortUrlGenerator.GenerateUniqueUrl());
+            _shortUrlGenerator.GenerateUniqueUrl(),
+            request.CreatedBy);
 
         await _urlDataStore.AddAsync(shortned, cancellationToken);
 

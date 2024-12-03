@@ -7,3 +7,5 @@
 ✔️ Should the token range use longs instead of ints?
 ✔️ Return the short url for a new url
 ✔️ When adding a new url, should save it
+✔️ Who's the creator
+When was created

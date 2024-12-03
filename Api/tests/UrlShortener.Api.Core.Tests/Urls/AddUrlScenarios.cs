@@ -39,8 +39,20 @@ public class AddUrlScenarios
         _urlDataStore.Should().ContainKey(response.ShortUrl);
     }
 
+    [Fact]
+    public async Task Should_save_short_url_with_created_by_and_created_on()
+    {
+        var request = CreateAddUrlRequest();
+
+        var response = await _handler.HandleAsync(request, default);
+
+        _urlDataStore.Should().ContainKey(response.ShortUrl);
+        _urlDataStore[response.ShortUrl].CreatedBy.Should().Be(request.CreatedBy);
+        //_urlDataStore[response.ShortUrl].CreatedOn.Should().Be(request.CreatedOn);
+    }
+
     private static AddUrlRequest CreateAddUrlRequest()
     {
-        return new AddUrlRequest(new Uri("https://dometrain.com"));
+        return new AddUrlRequest(new Uri("https://dometrain.com"), "test@test.com");
     }
 }
