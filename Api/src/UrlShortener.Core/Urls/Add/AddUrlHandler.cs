@@ -3,14 +3,21 @@
 public class AddUrlHandler
 {
     private readonly ShortUrlGenerator _shortUrlGenerator;
+    private readonly IUrlDataStore _urlDataStore;
 
-    public AddUrlHandler(ShortUrlGenerator shortUrlGenerator)
+    public AddUrlHandler(ShortUrlGenerator shortUrlGenerator, IUrlDataStore urlDataStore)
     {
         _shortUrlGenerator = shortUrlGenerator;
+        _urlDataStore = urlDataStore;
     }
 
-    public Task<AddUrlResponse> HandleAsync(AddUrlRequest request, CancellationToken cancellationToken)
+    public async Task<AddUrlResponse> HandleAsync(AddUrlRequest request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(new AddUrlResponse(request.LongUrl, _shortUrlGenerator.GenerateUniqueUrl()));
+        var shortned = new ShortnedUrl(request.LongUrl,
+            _shortUrlGenerator.GenerateUniqueUrl());
+
+        await _urlDataStore.AddAsync(shortned, cancellationToken);
+
+        return new AddUrlResponse(request.LongUrl, shortned.ShortUrl);
     }
 }

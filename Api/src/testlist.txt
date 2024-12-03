@@ -5,6 +5,5 @@
    Range as a type
    _tokenRange on TokenProvider can be null when getting the token
 ✔️ Should the token range use longs instead of ints?
-
 ✔️ Return the short url for a new url
-When adding a new url, should save it
+✔️ When adding a new url, should save it
