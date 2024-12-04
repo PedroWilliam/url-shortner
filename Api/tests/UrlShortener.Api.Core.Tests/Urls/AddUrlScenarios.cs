@@ -21,7 +21,7 @@ public class AddUrlScenarios
     }
 
     [Fact]
-    public async Task Should_return_shortned_url()
+    public async Task Should_return_shortened_url()
     {
         var request = CreateAddUrlRequest();
 

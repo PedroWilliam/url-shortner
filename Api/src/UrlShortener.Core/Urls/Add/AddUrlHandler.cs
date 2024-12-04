@@ -22,13 +22,13 @@ public class AddUrlHandler
             return Errors.MissingCreatedBy;
         }
 
-        var shortned = new ShortnedUrl(request.LongUrl,
+        var shortened = new ShortenedUrl(request.LongUrl,
             _shortUrlGenerator.GenerateUniqueUrl(),
             request.CreatedBy,
             _timeProvider.GetUtcNow());
 
-        await _urlDataStore.AddAsync(shortned, cancellationToken);
+        await _urlDataStore.AddAsync(shortened, cancellationToken);
 
-        return new AddUrlResponse(request.LongUrl, shortned.ShortUrl);
+        return new AddUrlResponse(request.LongUrl, shortened.ShortUrl);
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace UrlShortener.Core.Urls;
 
-public class ShortnedUrl
+public class ShortenedUrl
 {
-    public ShortnedUrl(Uri longUrl, string shortUrl, string createdBy, DateTimeOffset createdOn)
+    public ShortenedUrl(Uri longUrl, string shortUrl, string createdBy, DateTimeOffset createdOn)
     {
         LongUrl = longUrl;
         ShortUrl = shortUrl;
