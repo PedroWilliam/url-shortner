@@ -9,3 +9,4 @@
 ✔️ When adding a new url, should save it
 ✔️ Who's the creator
 ✔️ When was created
+✔️ User is required

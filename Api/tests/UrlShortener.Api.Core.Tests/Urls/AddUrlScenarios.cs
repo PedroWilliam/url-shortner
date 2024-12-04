@@ -27,8 +27,8 @@ public class AddUrlScenarios
 
         var response = await _handler.HandleAsync(request, default);
 
-        response.ShortUrl.Should().NotBeEmpty();
-        response.ShortUrl.Should().Be("1");
+        response.Value!.ShortUrl.Should().NotBeEmpty();
+        response.Value!.ShortUrl.Should().Be("1");
     }
 
     [Fact]
@@ -38,7 +38,8 @@ public class AddUrlScenarios
 
         var response = await _handler.HandleAsync(request, default);
 
-        _urlDataStore.Should().ContainKey(response.ShortUrl);
+        response.Succeeded.Should().BeTrue();
+        _urlDataStore.Should().ContainKey(response.Value!.ShortUrl);
     }
 
     [Fact]
@@ -48,13 +49,27 @@ public class AddUrlScenarios
 
         var response = await _handler.HandleAsync(request, default);
 
-        _urlDataStore.Should().ContainKey(response.ShortUrl);
-        _urlDataStore[response.ShortUrl].CreatedBy.Should().Be(request.CreatedBy);
-        _urlDataStore[response.ShortUrl].CreatedOn.Should().Be(_timeProvider.GetUtcNow());
+        response.Succeeded.Should().BeTrue();
+        _urlDataStore.Should().ContainKey(response.Value!.ShortUrl);
+        _urlDataStore[response.Value!.ShortUrl].CreatedBy.Should().Be(request.CreatedBy);
+        _urlDataStore[response.Value!.ShortUrl].CreatedOn.Should().Be(_timeProvider.GetUtcNow());
     }
 
-    private static AddUrlRequest CreateAddUrlRequest()
+    [Fact]
+    public async Task Should_return_error_if_created_by_is_empty()
     {
-        return new AddUrlRequest(new Uri("https://dometrain.com"), "test@test.com");
+        var request = CreateAddUrlRequest(createdBy: string.Empty);
+
+        var response = await _handler.HandleAsync(request, default);
+
+        response.Succeeded.Should().BeFalse();
+        response.Error.Code.Should().Be(Errors.MissingCreatedBy.Code);
+    }
+
+    private static AddUrlRequest CreateAddUrlRequest(string createdBy = "test@test.com")
+    {
+        return new AddUrlRequest(
+            new Uri("https://dometrain.com"),
+            createdBy);
     }
 }
