@@ -1,4 +1,5 @@
-﻿using UrlShortener.Api.Core.Tests.TestDoubles;
+﻿using Microsoft.Extensions.Time.Testing;
+using UrlShortener.Api.Core.Tests.TestDoubles;
 using UrlShortener.Core;
 using UrlShortener.Core.Urls.Add;
 
@@ -6,16 +7,17 @@ namespace UrlShortener.Api.Core.Tests.Urls;
 
 public class AddUrlScenarios
 {
+    private readonly FakeTimeProvider _timeProvider;
     private readonly AddUrlHandler _handler;
-    private readonly InMemoryUrlDatastore _urlDataStore;
+    private readonly InMemoryUrlDatastore _urlDataStore = new();
 
     public AddUrlScenarios()
     {
         var tokenProvider = new TokenProvider();
         tokenProvider.AssignRange(1, 5);
         var shortUrlGenerator = new ShortUrlGenerator(tokenProvider);
-        _urlDataStore = new InMemoryUrlDatastore();
-        _handler = new AddUrlHandler(shortUrlGenerator, _urlDataStore);
+        _timeProvider = new FakeTimeProvider();
+        _handler = new AddUrlHandler(shortUrlGenerator, _urlDataStore, _timeProvider);
     }
 
     [Fact]
@@ -48,7 +50,7 @@ public class AddUrlScenarios
 
         _urlDataStore.Should().ContainKey(response.ShortUrl);
         _urlDataStore[response.ShortUrl].CreatedBy.Should().Be(request.CreatedBy);
-        //_urlDataStore[response.ShortUrl].CreatedOn.Should().Be(request.CreatedOn);
+        _urlDataStore[response.ShortUrl].CreatedOn.Should().Be(_timeProvider.GetUtcNow());
     }
 
     private static AddUrlRequest CreateAddUrlRequest()
