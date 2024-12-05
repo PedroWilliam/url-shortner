@@ -1,6 +1,9 @@
 ﻿TESTE LIST
 ✔️ Check if the end of range is gt start
    Unique tokens
+	- Generating/assigning ranges
+	✔️ Ensure token is incremented
+	- Ensure no duplication
    Accept multiple ranges
    Range as a type
    _tokenRange on TokenProvider can be null when getting the token
