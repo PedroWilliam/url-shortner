@@ -1,12 +1,13 @@
 ﻿TESTE LIST
+Accept multiple ranges
+Range as a type
+_tokenRange on TokenProvider can be null when getting the token
+
 ✔️ Check if the end of range is gt start
    Unique tokens
 	- Generating/assigning ranges
 	✔️ Ensure token is incremented
-	- Ensure no duplication
-   Accept multiple ranges
-   Range as a type
-   _tokenRange on TokenProvider can be null when getting the token
+	✔️ Ensure no duplication
 ✔️ Should the token range use longs instead of ints?
 ✔️ Return the short url for a new url
 ✔️ When adding a new url, should save it

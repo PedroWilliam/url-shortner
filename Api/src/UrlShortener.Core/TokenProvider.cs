@@ -2,6 +2,8 @@
 
 public class TokenProvider
 {
+    private readonly object _tokenLock = new();
+
     private long _token = 0;
     private TokenRange? _tokenRange;
 
@@ -18,6 +20,9 @@ public class TokenProvider
 
     public long GetToken()
     {
-        return _token++;
+        lock (_tokenLock)
+        {
+            return _token++;
+        }
     }
 }
